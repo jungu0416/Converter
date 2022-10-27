@@ -39,7 +39,6 @@ public class Mysql{
         insertData();
 
         conn.close();
-
     }
 
     public void createTable() throws Exception{

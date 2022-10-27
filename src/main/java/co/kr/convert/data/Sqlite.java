@@ -18,8 +18,13 @@ public class Sqlite{
     private List dataList = new ArrayList();
     private Map map = new HashMap();
     private int columnCount;
+    private String fileName;
 
-    public Map<String, Object> getData(String fileName) throws SQLException {
+    public Sqlite(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Map<String, Object> getData() throws SQLException {
 
         String sql = "select * from ecod40s";
 
