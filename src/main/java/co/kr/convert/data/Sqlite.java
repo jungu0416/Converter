@@ -19,14 +19,16 @@ public class Sqlite{
     private Map map = new HashMap();
     private int columnCount;
     private String fileName;
+    private String tableName;
 
-    public Sqlite(String fileName) {
+    public Sqlite(String fileName,String tableName) {
         this.fileName = fileName;
+        this.tableName = tableName;
     }
 
     public Map<String, Object> getData() throws SQLException {
 
-        String sql = "select * from ecod40s";
+        String sql = "select * from "+tableName;
 
         conn = ConnectionSingleton.getConnection("sqlite",fileName);
         pstmt = conn.prepareStatement(sql);
@@ -60,7 +62,9 @@ public class Sqlite{
         map.put("cols",columnName);
         map.put("vals",dataList);
 
-        conn.close();
+        if ( rs != null ) try{rs.close();}catch(Exception e){}
+        if ( pstmt != null ) try{pstmt.close();}catch(Exception e){}
+        if ( conn != null ) try{conn.close();}catch(Exception e){}
 
         return map;
     }
