@@ -23,6 +23,7 @@ public class ConnectionSingleton {
 
                 Class.forName("org.sqlite.JDBC").newInstance();
                 String path = "C:\\Users\\User\\Desktop\\paradoxConvert\\sqlite\\"+fileName+".db";
+                System.out.println("path --->" + path);
                 conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 
                 //System.out.println("sqlite 연결 완료");
