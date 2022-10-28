@@ -22,7 +22,7 @@ public class ConnectionSingleton {
             } else if(dsn.equals("sqlite")) {
 
                 Class.forName("org.sqlite.JDBC").newInstance();
-                String path = "C:\\Users\\User\\Desktop\\paradoxConvert\\sqlite\\"+fileName+".db";
+                String path = "\\\\192.168.10.12\\share\\EMS-DB\\data\\paradox\\"+fileName+".db";
                 System.out.println("path --->" + path);
                 conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 
