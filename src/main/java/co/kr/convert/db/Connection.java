@@ -1,15 +1,13 @@
 package co.kr.convert.db;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Map;
 
-public class ConnectionSingleton {
+public class Connection {
     // 하나의 프로세스에서 공통으로 사용할 수 있는 공용자원(static)
-    private static Connection conn;
+    private static java.sql.Connection conn;
 
-    public static Connection getConnection(String dsn,String fileName) {
+    public static java.sql.Connection getConnection(String dsn, String fileName) {
         try {
             if( dsn.equals("mysql")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");

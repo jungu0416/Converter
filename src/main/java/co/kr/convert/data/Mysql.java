@@ -1,6 +1,6 @@
 package co.kr.convert.data;
 
-import co.kr.convert.db.ConnectionSingleton;
+import co.kr.convert.db.Connection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Mysql{
-    private static Connection conn;
+    private static java.sql.Connection conn;
     private Statement pstmt;
     private ResultSet rs;
     private String fileName;
@@ -23,7 +23,7 @@ public class Mysql{
     }
 
     public void setData() throws Exception {
-        conn = ConnectionSingleton.getConnection("mysql","nothing");
+        conn = Connection.getConnection("mysql","nothing");
 
         //해당 월에 테이블이 있는지 체크
         if(checkTable()){

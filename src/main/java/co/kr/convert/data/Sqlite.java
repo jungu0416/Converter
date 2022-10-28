@@ -1,6 +1,6 @@
 package co.kr.convert.data;
 
-import co.kr.convert.db.ConnectionSingleton;
+import co.kr.convert.db.Connection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Sqlite{
-    private static Connection conn;
+    private static java.sql.Connection conn;
     private PreparedStatement pstmt;
     private ResultSet rs;
     private ResultSetMetaData rsmd;
@@ -30,7 +30,7 @@ public class Sqlite{
 
         String sql = "select * from "+tableName;
 
-        conn = ConnectionSingleton.getConnection("sqlite",fileName);
+        conn = Connection.getConnection("sqlite",fileName);
         pstmt = conn.prepareStatement(sql);
         rs = pstmt.executeQuery();
         rsmd = rs.getMetaData();
