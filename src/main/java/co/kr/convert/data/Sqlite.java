@@ -20,8 +20,10 @@ public class Sqlite{
     private int columnCount;
     private String fileName;
     private String tableName;
+    private String folderName;
 
-    public Sqlite(String fileName,String tableName) {
+    public Sqlite(String folderName,String fileName,String tableName) {
+        this.folderName = folderName;
         this.fileName = fileName;
         this.tableName = tableName;
     }
@@ -30,7 +32,7 @@ public class Sqlite{
 
         String sql = "select * from "+tableName;
 
-        conn = Connection.getConnection("sqlite",fileName);
+        conn = Connection.getConnection("sqlite",folderName,fileName);
         pstmt = conn.prepareStatement(sql);
         rs = pstmt.executeQuery();
         rsmd = rs.getMetaData();

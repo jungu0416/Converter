@@ -23,7 +23,7 @@ public class Mysql{
     }
 
     public void setData() throws Exception {
-        conn = Connection.getConnection("mysql","nothing");
+        conn = Connection.getConnection("mysql","null","null");
 
         //해당 월에 테이블이 있는지 체크
         if(checkTable()){
@@ -39,9 +39,9 @@ public class Mysql{
         //데이터 마이그레이션
         insertData();
 
-        if ( rs != null ) try{rs.close();}catch(Exception e){}
-        if ( pstmt != null ) try{pstmt.close();}catch(Exception e){}
-        if ( conn != null ) try{conn.close();}catch(Exception e){}
+        if ( rs != null ) try{rs.close();}catch(Exception e){e.printStackTrace();}
+        if ( pstmt != null ) try{pstmt.close();}catch(Exception e){e.printStackTrace();}
+        if ( conn != null ) try{conn.close();}catch(Exception e){e.printStackTrace();}
     }
 
     public void createTable() throws Exception{

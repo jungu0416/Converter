@@ -7,7 +7,7 @@ public class Connection {
     // 하나의 프로세스에서 공통으로 사용할 수 있는 공용자원(static)
     private static java.sql.Connection conn;
 
-    public static java.sql.Connection getConnection(String dsn, String fileName) {
+    public static java.sql.Connection getConnection(String dsn, String folderName, String fileName) {
         try {
             if( dsn.equals("mysql")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -20,7 +20,7 @@ public class Connection {
             } else if(dsn.equals("sqlite")) {
 
                 Class.forName("org.sqlite.JDBC").newInstance();
-                String path = "\\\\192.168.10.12\\share\\EMS-DB\\data\\paradox\\"+fileName+".db";
+                String path = "\\\\192.168.10.12\\share\\EMS-DB\\data\\paradox\\"+folderName+"\\"+fileName+".db";
                 System.out.println("path --->" + path);
                 conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 
