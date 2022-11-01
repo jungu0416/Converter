@@ -15,24 +15,32 @@ public class Main {
         long beforeTime = System.currentTimeMillis(); //코드 실행 전에 시간 받아오기
 
         Map<String,Object> map;
-        String tableList[] = Migration.NAMES;
         Scanner sc = new Scanner(System.in);
-        System.out.print("마이그레이션할 폴더명을 입력하세요 : ");
-        String folderName = sc.next(); //fileName = "202210A";
-        String[] filenames = getDirectoryFileNames(folderName);
+        System.out.print("마이그레이션할 연도을 입력하세요 : ");
+        String year = sc.next();
+        String[] directoryFolderNames = getDirectoryFolderNames(year);
+        //String[] filenames = getDirectoryFileNames(folderName);
+        String[] filenames;
+        String tableList[] = Migration.NAMES;
 
-        for(String fileName : filenames){
-            fileName = fileName.replace(".db","");
-            System.out.println("현재 작업중인 .db 파일 이름 : " + fileName);
 
-            for(String tableName : tableList){
-                //데이터 추출
-                Sqlite sqlite = new Sqlite(folderName,fileName,tableName);
-                map = sqlite.getData();
+        for(int i=0; i< directoryFolderNames.length; i++){
+            String folderName = directoryFolderNames[i];
+            filenames = getDirectoryFileNames(folderName);
 
-                //데이터 삽입
-                Mysql mysql = new Mysql(map,fileName,tableName);
-                mysql.setData();
+            for(String fileName : filenames){
+                fileName = fileName.replace(".db","");
+                System.out.println("현재 작업중인 .db 파일 이름 : " + fileName);
+
+                for(String tableName : tableList){
+                    //데이터 추출
+                    Sqlite sqlite = new Sqlite(folderName,fileName,tableName);
+                    map = sqlite.getData();
+
+                    //데이터 삽입
+                    Mysql mysql = new Mysql(map,fileName,tableName);
+                    mysql.setData();
+                }
             }
         }
 
@@ -42,10 +50,28 @@ public class Main {
         System.out.print(secDiffTime > 60 ? Math.floorDiv(secDiffTime,60) + "분 " + Math.floorMod(secDiffTime,60) : secDiffTime);
         System.out.println("초가 소요되었습니다.");
 
+        String[] test = getDirectoryFolderNames("2014");
+
+        for(String str : test){
+            System.out.println(str);
+        }
+
     }
 
+    public static String[] getDirectoryFolderNames(String clientInput){
+
+        String DATA_DIRECTORY = Migration.defaultDir;
+        File dir = new File(DATA_DIRECTORY);
+        FilenameFilter filter = (f, name) -> name.contains(clientInput);
+        String[] folderNames = dir.list(filter);
+
+        return folderNames;
+    };
+
+
+
     public static String[] getDirectoryFileNames(String folderName){
-        String DATA_DIRECTORY = "\\\\192.168.10.12\\share\\EMS-DB\\data\\paradox\\"+folderName+"\\";
+        String DATA_DIRECTORY = Migration.defaultDir+folderName+"\\";
         File dir = new File(DATA_DIRECTORY);
         FilenameFilter filter = (f, name) -> name.contains(".db");
         String[] filenames = dir.list(filter);

@@ -1,5 +1,7 @@
 package co.kr.convert.db;
 
+import co.kr.convert.data.Migration;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -20,7 +22,7 @@ public class Connection {
             } else if(dsn.equals("sqlite")) {
 
                 Class.forName("org.sqlite.JDBC").newInstance();
-                String path = "\\\\192.168.10.12\\share\\EMS-DB\\data\\paradox\\"+folderName+"\\"+fileName+".db";
+                String path = Migration.defaultDir +folderName+"\\"+fileName+".db";
                 System.out.println("path --->" + path);
                 conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 
