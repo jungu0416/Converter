@@ -23,7 +23,7 @@ public class Connection {
 
                 Class.forName("org.sqlite.JDBC").newInstance();
                 String path = Migration.defaultDir +folderName+"\\"+fileName+".db";
-                System.out.println("path --->" + path);
+                System.out.println("path ---> " + path);
                 conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 
                 //System.out.println("sqlite 연결 완료");

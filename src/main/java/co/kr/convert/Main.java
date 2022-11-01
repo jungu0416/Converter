@@ -21,7 +21,6 @@ public class Main {
         String[] directoryFolderNames = getDirectoryFolderNames(year);
         //String[] filenames = getDirectoryFileNames(folderName);
         String[] filenames;
-        String tableList[] = Migration.NAMES;
 
 
         for(int i=0; i< directoryFolderNames.length; i++){
@@ -32,7 +31,7 @@ public class Main {
                 fileName = fileName.replace(".db","");
                 System.out.println("현재 작업중인 .db 파일 이름 : " + fileName);
 
-                for(String tableName : tableList){
+                for(String tableName : Migration.NAMES){
                     //데이터 추출
                     Sqlite sqlite = new Sqlite(folderName,fileName,tableName);
                     map = sqlite.getData();
@@ -49,12 +48,6 @@ public class Main {
 
         System.out.print(secDiffTime > 60 ? Math.floorDiv(secDiffTime,60) + "분 " + Math.floorMod(secDiffTime,60) : secDiffTime);
         System.out.println("초가 소요되었습니다.");
-
-        String[] test = getDirectoryFolderNames("2014");
-
-        for(String str : test){
-            System.out.println(str);
-        }
 
     }
 

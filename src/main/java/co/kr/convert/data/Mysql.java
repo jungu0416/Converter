@@ -27,10 +27,10 @@ public class Mysql{
 
         //해당 월에 테이블이 있는지 체크
         if(checkTable()){
-            System.out.println("테이블 있음");
+            //System.out.println("테이블 있음");
             dropTable();
         }else{
-            System.out.println("테이블 없음");
+            //System.out.println("테이블 없음");
         }
 
         //테이블 생성
